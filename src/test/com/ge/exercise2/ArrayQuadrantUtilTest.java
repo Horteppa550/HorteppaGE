@@ -7,39 +7,36 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class ArrayQuadrantUtilTest {
 
+	 char[][] data = {
+             {'a', 'b', 'c', 'd'},
+             {'e', 'f', 'g', 'h'},
+             {'i', 'j', 'k', 'l'},
+             {'m', 'n', 'o', 'p'}
+     };
+	
     @Test
     public void getQuadrantValuesTest() {
-        char[][] data = {
-                {'a', 'b', 'c', 'd'},
-                {'e', 'f', 'g', 'h'},
-                {'i', 'j', 'k', 'l'},
-                {'m', 'n', 'o', 'p'}
-        };
-
         ArrayQuadrantUtil util = new ArrayQuadrantUtil(data);
         Assume.assumeNotNull(util.getQuadrantValues(0, 0));
-
-        char[] expectedResult = {'a', 'b', 'e', 'f'};
-        assertArrayEquals(expectedResult, util.getQuadrantValues(0, 0));
-        
-        char[] expectedResult1 = {'k', 'l', 'o', 'p'};
-        assertArrayEquals(expectedResult1, util.getQuadrantValues(1, 1));
-        
     }
     
-    @Test(expected=IllegalArgumentException.class)
-    public void getQuadrantValuesNullTest() {
-    	  char[][] data = {
-                  {'a', 'b', 'c', 'd'},
-                  {'e', 'f', 'g', 'h'},
-                  {'i', 'j', 'k', 'l'},
-                  {'m', 'n', 'o', 'p'}
-          };
-    	  ArrayQuadrantUtil util = new ArrayQuadrantUtil(data);
-    	  util.getQuadrantValues(3, 3);
-    	  
-    	 
-    }
+    //Operation #1
+    @Test
+	public void Operation1RowTest() {
+		 ArrayQuadrantUtil util = new ArrayQuadrantUtil(data);
+		 char[] ch = {'e','f','g','h'};
+		 assertArrayEquals(ch,util.getRowValues(1));
+	}
+    
+    //Operation #2
+    @Test
+	public void Operation2ColumnTest() {
+		 ArrayQuadrantUtil util = new ArrayQuadrantUtil(data);
+		 char[] ch = {'b','f','j','n'};
+		 assertArrayEquals(ch,util.getColumnValues(1));
+	}
+    
+    //Operation #3
     @Test
     public void getQuadrantValuesNTest()
     {
@@ -55,33 +52,12 @@ public class ArrayQuadrantUtilTest {
  	  //GHIPQRYZ[
     }
     
-    @Test
-	public void Operation1RowTest() {
-		 char[][] data1 = {
-	                {'a', 'b', 'c', 'd'},
-	                {'e', 'f', 'g', 'h'},
-	                {'i', 'j', 'k', 'l'},
-	                {'m', 'n', 'o', 'p'}
-	        };
-		 
-		 ArrayQuadrantUtil util = new ArrayQuadrantUtil(data1);
-		 char[] ch = {'e','f','g','h'};
-		 assertArrayEquals(ch,util.getRowValues(1));
-		 
-	}
-    
-    @Test
-	public void Operation2ColumnTest() {
-		 char[][] data1 = {
-	                {'a', 'b', 'c', 'd'},
-	                {'e', 'f', 'g', 'h'},
-	                {'i', 'j', 'k', 'l'},
-	                {'m', 'n', 'o', 'p'}
-	        };
-		 
-		 ArrayQuadrantUtil util = new ArrayQuadrantUtil(data1);
-		 char[] ch = {'b','f','j','n'};
-		 assertArrayEquals(ch,util.getColumnValues(1));
-		 
-	}
+    @Test(expected=IllegalArgumentException.class)
+    public void getQuadrantValuesNullTest() {
+    	  ArrayQuadrantUtil util = new ArrayQuadrantUtil(data);
+    	  //3 X 3 Not feasible in 4 X 4 So throwing IllegalArgumentException
+    	  util.getQuadrantValues(3, 3);
+    	  
+    	 
+    }
 }

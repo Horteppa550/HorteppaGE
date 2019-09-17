@@ -23,14 +23,20 @@ public class ArrayQuadrantUtil {
     	char[] ch = null;
     	int count=0;
     	int length = data.length;
+    	// Possible square matrix in Given N X N Matrix
     	for(int i=2;i<=length/2;i++) {
     		if(length%i==0) numberOfQuadrantList.add(i);
     	}
     	for(int qSize:numberOfQuadrantList) {
     		ch = new char[qSize*qSize];
-    		System.out.println("=========== "+qSize+" X "+qSize+" ==================");
+    		System.out.println("===== "+qSize+" X "+qSize+" =====");
     		count=0;
-    		if(x>=length/qSize || y>=length/qSize) {throw new IllegalArgumentException("quadrant Limit acceeds ("+x+" , "+y+") for "+qSize+" X "+qSize+" Martix");}
+    		// Vaidate Given Co-ordinate(x,y) is Valid Or Not
+    		if(x>=length/qSize || y>=length/qSize) {
+    			logger.error("quadrant Limit acceeds ("+x+" , "+y+") ");
+    			throw new IllegalArgumentException("quadrant Limit acceeds ("+x+" , "+y+") ");
+    		}
+    		
     		for(int i=(x*qSize);i<(x*qSize)+qSize;i++) {
     			for(int j=(y*qSize);j<(y*qSize)+qSize;j++) {
     				System.out.print(" "+data[i][j]);
@@ -53,7 +59,6 @@ public class ArrayQuadrantUtil {
     
     //Operation #1 for row 
     public char[] getRowValues(int row) {
-    	
     	
     	return data[row];
     }
